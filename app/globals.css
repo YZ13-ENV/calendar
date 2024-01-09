@@ -73,4 +73,21 @@
   body {
     @apply bg-background text-foreground;
   }
+  ::-webkit-scrollbar {
+    width: .5rem;
+    height: .5rem;
+    cursor: pointer;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    width: .5rem;
+    height: .5rem;
+    border-radius: 9999px;
+    @apply bg-secondary;
+  }
+  ::selection {
+    @apply bg-primary text-primary-foreground
+  }
 }
