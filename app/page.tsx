@@ -1,8 +1,10 @@
+import User from "@/components/shared/user-circle";
 import { Button } from "@/components/ui/button";
 import { generateMonthCalendar } from "@/helpers/calendar-generators";
 import { DateTime } from "luxon";
 import Link from "next/link";
-import { BiMenu, BiX } from 'react-icons/bi'
+import { BiChevronDown, BiChevronUp, BiMenu, BiX } from 'react-icons/bi'
+import { ProjectsGrid } from "ui";
 
 type Props = {
   searchParams: {
@@ -21,10 +23,15 @@ export default function Home({ searchParams }: Props) {
           <section className="w-full max-w-screen flex items-start flex-row h-screen">
             {
               enableSideMenu &&
-              <div className="w-80 shrink-0 h-full bg-card"></div>
+              <div className="w-80 shrink-0 h-full bg-card">
+                <div className="w-full h-16 px-3 flex items-center shrink-0 gap-3">
+                  <div className="w-9 aspect-square rounded-lg bg-muted" />
+                  <h1 className='text-3xl font-bold'>Dealer</h1>
+                </div>
+              </div>
             }
             <div style={{ width: enableSideMenu ? 'calc(100% - 20rem)' : '' }} className="w-full h-full">
-              <div className="w-full h-16 px-3 flex items-center shrink-0 border-b border-x bg-card">
+              <div className="w-full h-16 px-3 flex items-center shrink-0 border-b border-x bg-card justify-between">
                 <div className="w-fit h-fit flex items-center gap-3">
                   <Button size='icon' variant='ghost'>
                     <Link href={enableSideMenu ? '/' : '?side=true'}>
@@ -36,6 +43,10 @@ export default function Home({ searchParams }: Props) {
                     </Link>
                   </Button>
                   <span className="text-3xl font-bold text-muted-foreground"><span className="text-accent-foreground capitalize">{currentMonth}</span> {year}</span>
+                </div>
+                <div className="w-fit h-fit flex items-center gap-3">
+                  <ProjectsGrid />
+                  <User />
                 </div>
               </div>
               <div className="w-full h-10 shrink-0 grid grid-cols-7 grid-rows-1 border-b border-x bg-card">

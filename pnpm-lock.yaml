@@ -52,7 +52,7 @@ dependencies:
     version: 1.0.7(tailwindcss@3.4.0)
   ui:
     specifier: github:yz13-env/ui
-    version: github.com/yz13-env/ui/6fff6740d0bd547d02f5e2bae7506d13ef0ce09d(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.4.0)
+    version: github.com/yz13-env/ui/80fe799503cc73f8a795df1ed644f56c060f5759(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.4.0)
 
 devDependencies:
   '@types/jsonwebtoken':
@@ -4345,11 +4345,11 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  github.com/yz13-env/ui/6fff6740d0bd547d02f5e2bae7506d13ef0ce09d(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.4.0):
-    resolution: {tarball: https://codeload.github.com/yz13-env/ui/tar.gz/6fff6740d0bd547d02f5e2bae7506d13ef0ce09d}
-    id: github.com/yz13-env/ui/6fff6740d0bd547d02f5e2bae7506d13ef0ce09d
+  github.com/yz13-env/ui/80fe799503cc73f8a795df1ed644f56c060f5759(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.4.0):
+    resolution: {tarball: https://codeload.github.com/yz13-env/ui/tar.gz/80fe799503cc73f8a795df1ed644f56c060f5759}
+    id: github.com/yz13-env/ui/80fe799503cc73f8a795df1ed644f56c060f5759
     name: ui
-    version: 0.0.2
+    version: 0.0.3
     engines: {node: '21'}
     peerDependencies:
       react: '18'
