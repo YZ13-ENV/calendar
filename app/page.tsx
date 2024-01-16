@@ -3,20 +3,25 @@ import { Button } from "@/components/ui/button";
 import { generateMonthCalendar } from "@/helpers/calendar-generators";
 import { DateTime } from "luxon";
 import Link from "next/link";
-import { BiChevronDown, BiChevronUp, BiMenu, BiX } from 'react-icons/bi'
+import { redirect } from "next/navigation";
+import { BiMenu, BiX } from 'react-icons/bi'
 import { ProjectsGrid } from "ui";
 
 type Props = {
   searchParams: {
+    date?: string
     side?: boolean
   }
 }
 export default function Home({ searchParams }: Props) {
-    const nowDate = DateTime.now().setLocale('ru')
+  const todayDate = searchParams.date
+    const nowDate = todayDate ? DateTime.fromFormat(todayDate, 'dd-MM-yyyy').setLocale('ru') : DateTime.now().setLocale('ru')
     const days = generateMonthCalendar(nowDate)
     const currentMonth = nowDate.monthLong
     const year = nowDate.year
+    const today = todayDate ? todayDate : nowDate.toFormat('dd-MM-yyyy')
     const enableSideMenu = searchParams.side || false
+    if (!todayDate) redirect(`/?date=${today}${enableSideMenu ? `&size=${enableSideMenu}` : ''}`)
     return (
         <>
           {/* <Header /> */}
@@ -75,13 +80,15 @@ export default function Home({ searchParams }: Props) {
               <div style={{ height: 'calc(100% - 64px - 40px)' }} className="w-full h-full shrink-0 grid grid-cols-7 grid-rows-6 border-l overflow-hidden">
                 {
                   days.map((day, index) => {
+                    const key = day.date.toFormat('dd-MM-yyyy')
+                    const selected = today === key
                     const dayNum = day.date.day
                     const isToday = day.key === nowDate.toFormat('yyyy-MM-dd')
                     const notCurrentMonth = day.date.month !== nowDate.month
                     const isLastDay = day.date.daysInMonth === day.date.day
                     const isFirstDay = day.date.day === 1
                     return (
-                      <div key={day.date.toString()} className="w-full h-full shrink-0 border-r border-b">
+                      <div key={day.date.toString()} className={`w-full h-full shrink-0 border-r border-b ${selected ? 'bg-card' : ''}`}>
                         <div className="w-full h-fit pt-2 px-3 flex items-center justify-between">
                           <span className='text-xs capitalize text-muted-foreground'>{dayNum}</span>
                           <div className="flex items-center gap-1 w-fit h-fit">
