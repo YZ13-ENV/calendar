@@ -1,20 +1,43 @@
 import { DateTime } from "luxon"
 
+
+export type CalendarItems = (DocEvent)[]
 export type CalendarItem = {
     isRange?: boolean
     key: string // as yyyy-MM-dd
     date: DateTime
-    items: DocCalendarEvent[]
+    items: CalendarItems
 }
 
-
-export type CalendarEvent = {
-    key: string // as 'dd-MM-yyyy'
-    title: string
-    description: string
-    startDate: number // converted toSeconds()
-    endDate: number // converted toSeconds()
-    pinnedItems?: [] // Думаю просто id с референсом на item
+// Можно помечать праздники, или выходные через GlobalEvent
+export type GlobalEvent = {
+    type: 'global-event'
+    name: string
+    description?: string
+    key: `${number}-${number}-${number}` // dd-MM-yyyy
+    duration: number // in days, ex. duration: 7
+}
+export type Reminder = {
+    type: 'reminder'
+    author: string
+    key: `${number}-${number}-${number}` // dd-MM-yyyy
+    name: string
+    description?: string
+    remindAt: number
+}
+export type Event = {
+    type: 'event'
+    author: string
+    key: `${number}-${number}-${number}` // dd-MM-yyyy
+    name: string
+    description?: string
+    performers: []
+    date: {
+        start: number,
+        end: number
+    }
 }
 
-export type DocCalendarEvent = { event_id: string } & CalendarEvent
+export type DocEvent = { doc_id: string } & Event
+export type DocReminder = { doc_id: string } & Reminder
+export type DocGEvent = { doc_id: string } & GlobalEvent

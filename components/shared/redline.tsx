@@ -16,7 +16,7 @@ const Redline = () => {
     const hr = ref.current
     if (hr) {
       const parent = hr.parentElement
-      console.log(hr, parent)
+      // console.log(hr, parent)
       if (parent) {
         const parentHeight = parent.clientHeight
         setHeight(parentHeight)

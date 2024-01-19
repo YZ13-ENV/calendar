@@ -1,7 +1,7 @@
-import { CalendarItem } from "@/types/calendar"
+import { CalendarItem, DocEvent } from "@/types/calendar"
 import { DateTime } from "luxon"
 
-export const generateMonthCalendar = (date: DateTime) => {
+export const generateMonthCalendar = (date: DateTime, events?: DocEvent[]) => {
     const currentMonthLastDay = date.daysInMonth
     const prevMonthLastDay = date.minus({ month: 1 }).daysInMonth
 
@@ -18,7 +18,7 @@ export const generateMonthCalendar = (date: DateTime) => {
     for (let i = (lastDayPrevMonth.day + 1) - dayBeforeFirstDay; i <= lastDayPrevMonth.day; i++) {
         const generatedDate = date.set({ day: i, month: date.month - 1 })
         const calendarItem: CalendarItem = {
-            key: generatedDate.toFormat('yyyy-MM-dd'),
+            key: generatedDate.toFormat('dd-MM-yyyy'),
             date: generatedDate,
             items: []
         }
@@ -27,7 +27,7 @@ export const generateMonthCalendar = (date: DateTime) => {
     for (let i = 1; i <= lastDayCurrentMonth.day; i++) {
         const generatedDate = date.set({ day: i, month: date.month })
         const calendarItem: CalendarItem = {
-            key: generatedDate.toFormat('yyyy-MM-dd'),
+            key: generatedDate.toFormat('dd-MM-yyyy'),
             date: generatedDate,
             items: []
         }
@@ -36,11 +36,22 @@ export const generateMonthCalendar = (date: DateTime) => {
     for (let i = 1; i <= dayAfterLastDay; i++) {
         const generatedDate = date.set({ day: i, month: date.month + 1 })
         const calendarItem: CalendarItem = {
-            key: generatedDate.toFormat('yyyy-MM-dd'),
+            key: generatedDate.toFormat('dd-MM-yyyy'),
             date: generatedDate,
             items: []
         }
         nextMonthItems.push(calendarItem)
     }
-    return [...prevMonthItems, ...currentMonthItems, ...nextMonthItems]
+    const result = [...prevMonthItems, ...currentMonthItems, ...nextMonthItems]
+    if (events && events.length !== 0) {
+        events.forEach(event => {
+            const key = event.key
+            const indexDay = result.findIndex(day => day.key === key)
+            const isKeyInResult = indexDay > -1
+            if (isKeyInResult) {
+                result[indexDay].items.push(event)
+            }
+        })
+    }
+    return result
 }

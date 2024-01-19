@@ -5,6 +5,8 @@ import { DateTime } from "luxon";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { BiRightArrowAlt } from 'react-icons/bi'
+import { cookies } from 'next/headers'
+import { calendar } from "@/api/calendar";
 
 type Props = {
   searchParams: {
@@ -12,11 +14,15 @@ type Props = {
     side?: boolean
   }
 }
-export default function Home({ searchParams }: Props) {
+export default async function Home({ searchParams }: Props) {
+    const cookieList = cookies()
+    const uidCookie = cookieList.get('uid')
+    const visitorId = uidCookie ? uidCookie.value : null
     const todayDate = searchParams.date
     const actualDate = DateTime.now().setLocale('ru')
     const nowDate = todayDate ? DateTime.fromFormat(todayDate, 'dd-MM-yyyy').setLocale('ru') : DateTime.now().setLocale('ru')
-    const days = generateMonthCalendar(nowDate)
+    const events = visitorId ? await calendar.events.get(visitorId) : []
+    const days = generateMonthCalendar(nowDate, events)
     const today = todayDate ? todayDate : nowDate.toFormat('dd-MM-yyyy')
     const enableSideMenu = searchParams.side || false
     if (!todayDate) redirect(`/?date=${today}${enableSideMenu ? `&side=${enableSideMenu}` : ''}`)
@@ -49,7 +55,7 @@ export default function Home({ searchParams }: Props) {
                     return (
                       <Link href={`?date=${key}`} key={day.date.toString()}
                       className={`w-full h-full shrink-0 border-r border-b cursor-pointer ${selected ? 'bg-card' : 'hover:bg-card transition-colors'}`}>
-                        <div className="w-full h-fit pt-2 px-3 flex items-center justify-between">
+                        <div className="w-full h-fit pt-2 px-3 shrink-0 flex items-center justify-between">
                           <span className='text-xs capitalize text-muted-foreground'>{dayNum}</span>
                           <div className="flex items-center gap-1 w-fit h-fit">
                               <span className='text-xs capitalize text-muted-foreground'>
@@ -64,6 +70,26 @@ export default function Home({ searchParams }: Props) {
                               }
                               <Link href={`/day/${key}`} className="text-muted-foreground"><BiRightArrowAlt /></Link>
                           </div>
+                        </div>
+                        <div style={{ height: 'calc(100% - 24px)' }} className="w-full h-full px-3 py-2 flex flex-col">
+                          {
+                            day.items.filter((_, i) => i <= 3).map((item, i) => {
+                              const isLast = i === 3
+                              const isFirst = i === 0
+                              const dynamicClassName = `${isLast ? 'rounded-b-md' : isFirst ? 'rounded-t-md border-b' : 'rounded-none border-b'}`
+                              const start = DateTime.fromSeconds(item.date.start)
+                              const end = DateTime.fromSeconds(item.date.end)
+                              return (
+                                <div key={item.doc_id}
+                                className={`w-full h-1/4 ${dynamicClassName} transition-colors hover:bg-muted flex items-center justify-between px-1.5`}>
+                                  <span className="text-xs text-muted-foreground">{item.name}</span>
+                                  <span className="text-xs text-muted-foreground">
+                                    {start.hour > 9 ? start.hour : `0${start.hour}`}:{start.minute}-{end.hour > 9 ? end.hour : `0${end.hour}`}:{end.minute}
+                                  </span>
+                                </div>
+                              )
+                            })
+                          }
                         </div>
                       </Link>
                       )
