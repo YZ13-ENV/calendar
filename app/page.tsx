@@ -40,7 +40,7 @@ export default async function Home({ searchParams }: Props) {
             <div style={{ width: enableSideMenu ? 'calc(100% - 20rem)' : '' }} className="w-full h-full">
               <Header />
               <MonthDayNames />
-              <div style={{ height: 'calc(100% - 64px - 40px)' }} className="month-wrapper">
+              <div style={{ height: 'calc(100% - 64px - 33px)' }} className="month-wrapper">
                 { days.map((day, index) => <MonthCell providedDate={todayDate} key={day.date.toString()} day={day} index={index} /> ) }
               </div>
             </div>
