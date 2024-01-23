@@ -24,6 +24,7 @@ export const calendar = {
         const headers = new Headers()
         const authHeader = authorizationHeader()
         headers.append('authorization', authHeader || '')
+        headers.append('Content-Type', 'application/json')
         const url = `${api_host}/calendar/event`
         const res = await fetch(url, { method: 'POST', headers: headers, body: JSON.stringify(event) })
         if (res.ok) return await res.json() as DocEvent
@@ -50,6 +51,7 @@ export const calendar = {
         const headers = new Headers()
         const authHeader = authorizationHeader()
         headers.append('authorization', authHeader || '')
+        headers.append('Content-Type', 'application/json')
         const url = `${api_host}/calendar/event?eventId=${eventId}`
         const res = await fetch(url, { method: 'PATCH', headers: headers, body: JSON.stringify(event) })
         if (res.ok) return await res.json() as DocEvent

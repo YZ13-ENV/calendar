@@ -14,13 +14,13 @@ export type GlobalEvent = {
     type: 'global-event'
     name: string
     description?: string
-    key: `${number}-${number}-${number}` // dd-MM-yyyy
+    key: string // dd-MM-yyyy
     duration: number // in days, ex. duration: 7
 }
 export type Reminder = {
     type: 'reminder'
     author: string
-    key: `${number}-${number}-${number}` // dd-MM-yyyy
+    key: string // dd-MM-yyyy
     name: string
     description?: string
     remindAt: number
@@ -28,7 +28,7 @@ export type Reminder = {
 export type Event = {
     type: 'event'
     author: string
-    key: `${number}-${number}-${number}` // dd-MM-yyyy
+    key: string // dd-MM-yyyy
     name: string
     description?: string
     performers: []
