@@ -7,7 +7,7 @@ const layout = ({ children }: Props) => {
   return (
     <>
       <Header />
-      <div style={{ minHeight: 'calc(100vh - 64px)' }} className="w-full">{children}</div>
+      { children }
     </>
   )
 }
