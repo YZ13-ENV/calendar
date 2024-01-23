@@ -16,8 +16,9 @@ const DayCell = ({ event }: Props) => {
   const hourHeight = height / 24
   const hourBlockHeight = 256
   const minutesBlockHeight = 256 / 60
+  const secondsBlockHeight = 256 / (60 * 2)
   const top = (date.hour * hourHeight) + (date.minute * minuteHeight) + (date.second * secondHeight)
-  const eventHeight = (endDate.hour - date.hour) * hourBlockHeight + (endDate.minute - date.minute) * minutesBlockHeight
+  // const eventHeight = (endDate.hour - date.hour) * hourBlockHeight + (endDate.minute - date.minute) * minutesBlockHeight + (endDate.second - date.second) * secondsBlockHeight
   useEffect(() => {
     const div = ref.current
     if (div) {
@@ -30,11 +31,16 @@ const DayCell = ({ event }: Props) => {
     }
   },[ref])
   return (
-    <div ref={ref} style={{ top: `${top}px`, height: `${eventHeight}px` }}
-    className="absolute w-full py-3 px-20">
-      <span className="text-sm">
-        {date.toFormat('HH:mm')}-{endDate.toFormat('HH:mm')}
-      </span>
+    <div ref={ref} style={{ top: `${top}px` }}
+    className="absolute w-full px-20 z-20 h-fit">
+      <div className="w-full h-full rounded-lg bg-card p-3">
+        <div className="w-fit h-fit flex items-center gap-2">
+          <span className="text-sm">{date.toFormat('HH:mm')}-{endDate.toFormat('HH:mm')}</span>
+          <span className="text-sm text-muted-foreground">-</span>
+          <span className="text-sm">{ event.name }</span>
+        </div>
+        <span className="text-xs text-muted-foreground">{event.description}</span>
+      </div>
     </div>
   )
 }

@@ -50,8 +50,8 @@ const MonthCell = ({ day, index, providedDate }: Props) => {
             return (
               <div key={item.doc_id}
               className={`w-full h-1/4 ${dynamicClassName} transition-colors hover:bg-muted flex items-center justify-between px-1.5`}>
-                <span className="text-xs text-muted-foreground">{item.name}</span>
-                <span className="text-xs text-muted-foreground">
+                <span className="line-clamp-1 text-xs text-muted-foreground">{item.name}</span>
+                <span className="text-xs text-muted-foreground shrink-0">
                   { start.hour > 9 ? start.hour : `0${start.hour}` }
                   :
                   { start.minute > 9 ? start.minute : `0${start.minute}` }
