@@ -6,10 +6,14 @@ export const parseDate = (dateKey: string) => {
   ? DateTime.fromFormat(dateKey, 'dd-MM-yyyy').setLocale('ru')
   : DateTime.now().setLocale('ru')
   const actualDate = DateTime.now().setLocale('ru')
+  const actualKey = actualDate.toFormat('dd-MM-yyyy')
   const result_obj = {
     date: date, // Дата, которую получили из прокинутого dateKey
+    key: dateKey,
     actual_date: actualDate, // Текущая дата
-    key: dateKey
+    actual_key: actualKey
   }
   return result_obj
 }
+
+export const getKey = (date: DateTime): string => date.toFormat('dd-MM-yyyy')

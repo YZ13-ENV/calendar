@@ -20,8 +20,8 @@ const page = async({ params }: Props) => {
   const cookieList = cookies()
   const uidCookie = cookieList.get('uid')
   const visitorId = uidCookie ? uidCookie.value : null
-  const { actual_date } = parseDate(dateKey)
-  const actualKey = actual_date.toFormat('dd-MM-yyyy')
+  const { actual_key } = parseDate(dateKey)
+  const actualKey = actual_key
   const events = visitorId ? await calendar.events.get(visitorId) : []
   return (
     <div style={{ minHeight: 'calc(100dvh - 64px)' }} className="w-full flex items-start h-full">

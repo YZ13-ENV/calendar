@@ -1,6 +1,5 @@
 import { generateMonthCalendar } from "@/helpers/calendar-generators"
 import { parseDate } from "@/helpers/day-parser"
-import { DateTime } from "luxon"
 
 type Props = {
   params: {
