@@ -4,7 +4,10 @@ import { useInterval } from "ahooks"
 import { DateTime } from "luxon"
 import { ElementRef, useEffect, useRef, useState } from "react"
 
-const Redline = () => {
+type Props = {
+  hideTime?: boolean
+}
+const Redline = ({ hideTime=false }: Props) => {
   const [date, setDate] = useState<DateTime>(DateTime.now())
   const [height, setHeight] = useState<number>(0)
   const ref = useRef<ElementRef<'hr'>>(null)
@@ -29,9 +32,12 @@ const Redline = () => {
   return (
     <div ref={ref} style={{ top: `${top}px` }}
     className="w-full transition-transform h-fit flex items-center absolute z-20">
-      <span className="px-2 relative left-4 py-0.5 rounded-full z-20 bg-destructive text-destructive-foreground text-sm">
-        {date.hour > 9 ? date.hour : `0${date.hour}`}:{date.minute > 9 ? date.minute : `0${date.minute}`}
-      </span>
+      {
+        !hideTime &&
+        <span className="px-2 relative left-4 py-0.5 rounded-full z-20 bg-destructive text-destructive-foreground text-sm">
+          {date.hour > 9 ? date.hour : `0${date.hour}`}:{date.minute > 9 ? date.minute : `0${date.minute}`}
+        </span>
+      }
       <hr className="border-destructive absolute left-0 w-full" />
     </div>
   )

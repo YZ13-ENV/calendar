@@ -1,6 +1,13 @@
 import { CalendarItem, DocEvent } from "@/types/calendar"
 import { DateTime } from "luxon"
 
+export const mergeDayEvents = (day: CalendarItem, events: DocEvent[]): CalendarItem => {
+    const matchedEvents = events.filter(event => event.key === day.key)
+    return {
+        ...day,
+        items: matchedEvents
+    }
+}
 export const generateMonthCalendar = (date: DateTime, events?: DocEvent[]) => {
     const currentMonthLastDay = date.daysInMonth
     const prevMonthLastDay = date.minus({ month: 1 }).daysInMonth

@@ -21,11 +21,11 @@ export default async function Home({ params }: Props) {
     const events = visitorId ? await calendar.events.get(visitorId) : []
     const days = generateMonthCalendar(nowDate, events)
     const today = todayDate ? todayDate : nowDate.toFormat('dd-MM-yyyy')
-    if (!todayDate) redirect(`/?date=${today}`)
+    if (!todayDate) redirect(`/month/${today}`)
     return (
       <>
         <MonthDayNames />
-        <div style={{ height: 'calc(100dvh - 64px - 33px)' }} className="month-wrapper">
+        <div style={{ height: 'calc(100dvh - 64px - 33px)' }} className="month-wrapper border-l">
           { days.map((day, index) => <MonthCell providedDate={todayDate} key={day.date.toString()} day={day} index={index} /> ) }
         </div>
       </>
