@@ -1,6 +1,5 @@
 import { DateTime } from "luxon"
 
-
 export type CalendarItems = (DocEvent)[]
 export type CalendarItem = {
     isRange?: boolean
@@ -25,6 +24,9 @@ export type Reminder = {
     description?: string
     remindAt: number
 }
+export type RecurringEvent = {
+    frequency: 'daily' | 'weekly' | 'monthly' | 'yearly'
+}
 export type Event = {
     type: 'event'
     author: string
@@ -36,8 +38,17 @@ export type Event = {
         start: number,
         end: number
     }
+    location?: {
+        longitude: number
+        latitude: number
+    }
+    createdAt: number
+    recurring?: RecurringEvent
+    attendees?: string[] // участники события
+    notes?: string[] // массив id заметок
+    priority?: 'low' | 'medium' | 'high'
+    status?: 'scheduled' | 'completed' | 'cancelled'
 }
-
 export type DocEvent = { doc_id: string } & Event
 export type DocReminder = { doc_id: string } & Reminder
 export type DocGEvent = { doc_id: string } & GlobalEvent

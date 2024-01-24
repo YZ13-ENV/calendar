@@ -12,10 +12,11 @@ import { DateTime } from 'luxon'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { BiLoaderAlt, BiPlus, BiRightArrowAlt, BiX } from 'react-icons/bi'
+import { BiChevronDown, BiLoaderAlt, BiPlus, BiRightArrowAlt, BiX } from 'react-icons/bi'
 
 const NewEventDrawer = () => {
   const { refresh } = useRouter()
+  const { now } = DateTime
   const [open, setOpen] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const [user] = useAuthState(auth)
@@ -39,6 +40,7 @@ const NewEventDrawer = () => {
         key: date.toFormat('dd-MM-yyyy'),
         name: name,
         performers: [],
+        createdAt: now().toSeconds(),
         date: {
           start: startDate.toSeconds(),
           end: endDate.toSeconds()
@@ -59,7 +61,11 @@ const NewEventDrawer = () => {
   return (
     <Drawer open={open} onOpenChange={state => setOpen(state)}>
       <DrawerTrigger asChild>
-        <Button disabled={!user} className='gap-2'><BiPlus size={18} />Добавить</Button>
+        <Button disabled={!user} size='sm' className='gap-2'><BiPlus size={18} />Добавить</Button>
+        {/* <div className="w-fit flex items-center"> */}
+          {/* <Button className='gap-2 rounded-none rounded-l-md' disabled={!user}><BiPlus size={18} />Добавить</Button> */}
+          {/* <Button className='rounded-none rounded-r-md' size='icon'><BiChevronDown /></Button> */}
+        {/* </div> */}
       </DrawerTrigger>
       <DrawerContent className='max-w-md mx-auto w-full'>
         <div className="w-full h-fit flex flex-col p-6">

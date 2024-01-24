@@ -33,7 +33,7 @@ const DayCell = ({ event }: Props) => {
   return (
     <div ref={ref} style={{ top: `${top}px` }}
     className="absolute w-full px-20 z-20 h-fit">
-      <div className="w-full h-full rounded-lg bg-card p-3">
+      <div className="w-full h-full rounded-lg transition-colors hover:bg-muted cursor-pointer border bg-card p-3">
         <div className="w-fit h-fit flex items-center gap-2">
           <span className="text-sm">{date.toFormat('HH:mm')}-{endDate.toFormat('HH:mm')}</span>
           <span className="text-sm text-muted-foreground">-</span>

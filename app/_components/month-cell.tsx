@@ -24,16 +24,18 @@ const MonthCell = ({ day, index, providedDate }: Props) => {
     <div className={`w-full h-full shrink-0 border-r border-b cursor-pointer ${selected ? 'bg-card' : 'hover:bg-card transition-colors'}`}>
       {/* <Link href={`?date=${key}`} /> */}
       <div className="w-full h-fit pt-2 px-3 shrink-0 flex items-center justify-between">
-        <Link href={`?date=${key}`} className='text-xs capitalize text-muted-foreground'>{dayNum}</Link>
+        <Link href={`/month/${key}`} className='text-xs capitalize text-muted-foreground'>{dayNum}</Link>
         <div className="flex items-center gap-1 w-fit h-fit">
-            <span className='text-xs capitalize text-muted-foreground'>
             {
-                isToday
-                ? 'Сегодня'
-                : ((notCurrentMonth && isFirstDay) || (isLastDay && notCurrentMonth)) && <span className="capitalize">{ day.date.setLocale('ru').monthLong }</span>
+                ((notCurrentMonth && isFirstDay) || (isLastDay && notCurrentMonth)) &&
+                <span className="capitalize text-xs text-muted-foreground">
+                  { day.date.setLocale('ru').monthLong }
+                </span>
             }
-            </span>
-            <Link href={`/day/${key}`} className="text-muted-foreground"><BiRightArrowAlt /></Link>
+            <Link href={`/day/${key}`} className="capitalize text-xs text-muted-foreground inline-flex items-center gap-2">
+              { isToday && <span>Сегодня</span> }
+              <BiRightArrowAlt size={16} />
+            </Link>
         </div>
       </div>
       <div style={{ height: 'calc(100% - 24px)' }} className="w-full h-full px-3 py-2 flex flex-col">
@@ -48,7 +50,7 @@ const MonthCell = ({ day, index, providedDate }: Props) => {
             const start = DateTime.fromSeconds(item.date.start)
             const end = DateTime.fromSeconds(item.date.end)
             return (
-              <div key={item.doc_id}
+              <Link key={item.doc_id} href={`/event/${item.doc_id}`}
               className={`w-full h-1/4 ${dynamicClassName} transition-colors hover:bg-muted flex items-center justify-between px-1.5`}>
                 <span className="line-clamp-1 text-xs text-muted-foreground">{item.name}</span>
                 <span className="text-xs text-muted-foreground shrink-0">
@@ -60,7 +62,7 @@ const MonthCell = ({ day, index, providedDate }: Props) => {
                   :
                   { end.minute > 9 ? end.minute : `0${end.minute}` }
                 </span>
-              </div>
+              </Link>
             )
           })
         }

@@ -38,7 +38,7 @@ const page = async({ params }: Props) => {
       {
         scratch.map(item =>
         <>
-          <div className="w-full relative h-64 p-6">
+          <div className="w-full relative h-64 p-6 hover:bg-card transition-colors cursor-pointer">
             <span className="relative -top-3 text-muted-foreground text-sm">{item > 9 ? item : `0${item}`}:00</span>
             { lines.map(line => <Separator key={line + '-line-bg'} style={{ top: `${(line * 256) / lines.length - 1}px` }} className="absolute left-0 opacity-50" />) }
           </div>

@@ -1,5 +1,5 @@
 'use client'
-import { usePathname, useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { Button } from "../ui/button"
 import Link from "next/link"
 import { ProjectsGrid } from "ui"
@@ -7,23 +7,22 @@ import User from "../shared/user-circle"
 import { DateTime } from "luxon"
 import NewEventDrawer from "@/app/_components/new-event-drawer"
 import ViewSelect from "./view-select"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 type ViewMode = 'day' | 'week' | 'month' | 'year'
 const views = ['day', 'week', 'month', 'year']
-type Props = {
-    providedDate?: string
-}
-const Header = ({ providedDate }: Props) => {
+const Header = () => {
     const [mode, setMode] = useState<ViewMode>('month')
-    const searchParams = useSearchParams()
-    const todayDate = providedDate ? providedDate : searchParams.get('date')
-    const nowDate = todayDate ? DateTime.fromFormat(todayDate, 'dd-MM-yyyy').setLocale('ru') : DateTime.now().setLocale('ru')
+    const path = usePathname()
+    const extractedDateKey = useMemo(() => { return path.replace(`/${mode}/`, '') },[path, mode])
+    const todayDate = extractedDateKey
+    const nowDate = todayDate
+    ? DateTime.fromFormat(todayDate, 'dd-MM-yyyy').setLocale('ru')
+    : DateTime.now().setLocale('ru')
     const currentMonth = nowDate.monthLong
     const year = nowDate.year
     const actualDate = DateTime.now().setLocale('ru')
     const todayKey = actualDate.toFormat('dd-MM-yyyy')
-    const path = usePathname()
     const linkByMode = mode === 'month' ? `/month/${todayKey}` : `/day/${todayKey}`
     const DateView = (props: { mode: ViewMode }): JSX.Element | null => {
         const mode = props.mode
