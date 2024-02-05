@@ -3,9 +3,9 @@ import Header from "@/components/widgets/header";
 import { generateMonthCalendar } from "@/helpers/calendar-generators";
 import { DateTime } from "luxon";
 import { redirect } from "next/navigation";
-import { cookies } from 'next/headers'
 import { calendar } from "@/api/calendar";
 import MonthCell from "../../../../_components/month-cell";
+import { getVisitorId } from "@/helpers/cookies";
 
 type Props = {
   params: {
@@ -13,9 +13,7 @@ type Props = {
   }
 }
 export default async function Home({ params }: Props) {
-    const cookieList = cookies()
-    const uidCookie = cookieList.get('uid')
-    const visitorId = uidCookie ? uidCookie.value : null
+    const visitorId = getVisitorId()
     const todayDate = params.date
     const nowDate = todayDate ? DateTime.fromFormat(todayDate, 'dd-MM-yyyy').setLocale('ru') : DateTime.now().setLocale('ru')
     const events = visitorId ? await calendar.events.get(visitorId) : []

@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Geologica } from 'next/font/google'
 import StateProvider from '@/components/StateProvider'
 import GlobalDateUpdater from '@/components/shared/global-date-updater'
+import EventsAnnouncer from '@/components/shared/events-announcer'
 const first_font = Geologica({ subsets: ['latin', 'cyrillic'], weight: ['600', '500', '400', '300', '200'], variable: '--root-font' })
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className='dark'>
         <StateProvider>
           <GlobalDateUpdater />
+          <EventsAnnouncer />
           {children}
         </StateProvider>
       </body>
