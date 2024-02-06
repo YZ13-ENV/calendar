@@ -8,6 +8,7 @@ import { DateTime } from "luxon"
 import NewEventDrawer from "@/app/_components/new-event-drawer"
 import ViewSelect from "./view-select"
 import { useEffect, useMemo, useState } from "react"
+import NotificationsWrapper from "../shared/notifications"
 
 type ViewMode = 'day' | 'week' | 'month' | 'year'
 const views = ['day', 'week', 'month', 'year']
@@ -59,6 +60,7 @@ const Header = () => {
             <div className="w-fit h-fit flex items-center gap-3">
                 <ViewSelect />
                 <NewEventDrawer />
+                <NotificationsWrapper />
                 <div className="shrink-0"><ProjectsGrid /></div>
                 <div className="shrink-0"><User /></div>
             </div>

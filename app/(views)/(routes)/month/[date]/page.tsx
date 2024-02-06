@@ -24,7 +24,10 @@ export default async function Home({ params }: Props) {
       <>
         <MonthDayNames />
         <div style={{ height: 'calc(100dvh - 64px - 33px)' }} className="month-wrapper border-l">
-          { days.map((day, index) => <MonthCell providedDate={todayDate} key={day.date.toString()} day={day} index={index} /> ) }
+          { days.map(
+              (day, index) => <MonthCell providedDate={todayDate} key={day.date.toString()} day={day} index={index} />
+            )
+          }
         </div>
       </>
     )
