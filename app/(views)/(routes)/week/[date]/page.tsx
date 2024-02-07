@@ -70,7 +70,7 @@ const page = async({ params }: Props) => {
                           <div className="w-full h-full rounded-lg bg-card hover:bg-muted transition-colors cursor-pointer p-3 flex flex-col">
                             <span className="text-xs text-muted-foreground">{date.toFormat('HH:mm')}-{endDate.toFormat('HH:mm')}</span>
                             <span className="font-medium text-sm">{event.name}</span>
-                            { event.description && <span className="text-xs text-muted-foreground">{event.description}</span> }
+                            { event.description && <span className="line-clamp-5 text-xs text-muted-foreground">{event.description}</span> }
                           </div>
                         </div>
                       )

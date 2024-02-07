@@ -21,10 +21,11 @@ const MonthCell = ({ day, index, providedDate }: Props) => {
   const notCurrentMonth = day.date.month !== nowDate.month
   const isLastDay = day.date.daysInMonth === day.date.day
   const isFirstDay = day.date.day === 1
+  // const events = []
   return (
     <div className={`w-full h-full shrink-0 border-r border-b cursor-pointer ${selected ? 'bg-card' : 'hover:bg-card transition-colors'}`}>
       {/* <Link href={`?date=${key}`} /> */}
-      <div className="w-full h-fit pt-2 px-3 shrink-0 flex items-center justify-between">
+      <div className="w-full h-fit py-2 px-3 shrink-0 flex items-center justify-between">
         <Link href={`/month/${key}`} className='text-xs capitalize text-muted-foreground'>{dayNum}</Link>
         <div className="flex items-center gap-1 w-fit h-fit">
             {
@@ -39,7 +40,7 @@ const MonthCell = ({ day, index, providedDate }: Props) => {
             </Link>
         </div>
       </div>
-      <div style={{ height: 'calc(100% - 24px)' }} className="w-full h-full px-3 py-2 flex flex-col">
+      <div style={{ height: 'calc(100% - 32px)' }} className="w-full h-full flex flex-col">
         {
           day.items
           .sort((a, b) => a.date.start - b.date.start)

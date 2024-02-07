@@ -15,17 +15,21 @@ const EventMonthItem = ({ event, index }: Props) => {
   const inSeconds = date.toSeconds()
   const isLast = index === 3
   const isFirst = index === 0
-  const dynamicClassName = `${isLast ? 'rounded-b-md' : isFirst ? 'rounded-t-md border-b' : 'rounded-none border-b'}`
+  const dynamicClassName = `${isLast ? 'border-0' : isFirst ? '' : ''}`
   const start = DateTime.fromSeconds(event.date.start)
   const end = DateTime.fromSeconds(event.date.end)
   const isEnded = inSeconds >= event.date.end
   return (
     <Link href={`/event/${event.doc_id}`}
     className={cn(
-      isEnded ? 'bg-muted text-muted-foreground' : '',
-      `w-full h-1/4 ${dynamicClassName} transition-colors hover:bg-muted flex items-center justify-between px-1.5`
+      isEnded ? 'border-b text-muted-foreground' : '',
+      dynamicClassName,
+      `w-full h-1/4 transition-colors hover:bg-muted flex items-center justify-between px-3`
     )}>
-      <span className="line-clamp-1 text-xs text-muted-foreground">{event.name}</span>
+      <span className={cn(
+        isEnded ? "line-through" : "",
+        "line-clamp-1 text-xs text-muted-foreground"
+      )}>{event.name}</span>
       <span className="text-xs text-muted-foreground shrink-0">
         { start.hour > 9 ? start.hour : `0${start.hour}` }
         :
