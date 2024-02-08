@@ -100,4 +100,47 @@
   .month-wrapper {
     @apply w-full h-full shrink-0 grid grid-cols-7 grid-rows-6 overflow-hidden
   }
+  /* md-layout - need for markdown */
+  .md-layout > h1 {
+    @apply pt-12 mb-6
+  }
+  .md-layout > h1:first-of-type {
+    @apply pt-0
+  }
+  .md-layout > h2:first-of-type {
+    @apply pt-0
+  }
+  .md-layout > h3:first-of-type {
+    @apply pt-0
+  }
+  .md-layout > h4:first-of-type {
+    @apply pt-0
+  }
+  .md-layout > h5:first-of-type {
+    @apply pt-0
+  }
+  .md-layout > h6:first-of-type {
+    @apply pt-0
+  }
+  .md-layout > h2 {
+    @apply pt-10 mb-6
+  }
+  .md-layout > h3 {
+    @apply pt-9 mb-6
+  }
+  .md-layout > h4 {
+    @apply pt-8 mb-6
+  }
+  .md-layout > h5 {
+    @apply pt-7 mb-6
+  }
+  .md-layout > h6 {
+    @apply pt-6 mb-6
+  }
+  .md-layout > p {
+    @apply my-4
+  }
+  .md-layout > span {
+    @apply my-4
+  }
 }

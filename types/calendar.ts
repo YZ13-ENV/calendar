@@ -7,7 +7,12 @@ export type CalendarItem = {
     date: DateTime
     items: CalendarItems
 }
-
+export type EventTodo = {
+    checked: boolean
+    text: string
+    performers: []
+    deadline?: number // должен быть в пределах события
+}
 // Можно помечать праздники, или выходные через GlobalEvent
 export type GlobalEvent = {
     type: 'global-event'
@@ -33,7 +38,7 @@ export type Event = {
     key: string // dd-MM-yyyy
     name: string
     description?: string
-    performers: []
+    performers: [] // ответственные за событие
     date: {
         start: number,
         end: number
@@ -44,7 +49,8 @@ export type Event = {
     }
     createdAt: number
     recurring?: RecurringEvent
-    attendees?: string[] // участники события
+    attendees?: string[] // участники события? Кто будет принимать участие, но не будет ответственен за него
+    todo?: EventTodo[]
     notes?: string[] // массив id заметок
     priority?: 'low' | 'medium' | 'high'
     status?: 'scheduled' | 'completed' | 'cancelled'
