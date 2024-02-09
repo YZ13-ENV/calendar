@@ -11,7 +11,7 @@ const layout = ({ children, params }: Props) => {
   const { id } = params
   return (
     <div className="w-full h-screen flex flex-col">
-      <div className="w-full h-fit flex items-center justify-between border-b p-6 bg-card">
+      <div className="w-full h-fit flex items-center justify-between border-b py-4 px-6 bg-card">
         <EventNav prefix={id} />
         <div className="flex items-center gap-2">
           <UserSection />
