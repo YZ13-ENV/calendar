@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { useDebounceEffect } from "ahooks"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { BiEdit, BiX } from "react-icons/bi"
 import { toast } from "sonner"
 import { ForwardRefEditor } from 'ui'
 
@@ -25,13 +26,13 @@ const Description = ({ description, id, children }: Props) => {
     if (description !== text) updateDescription()
   },[text, setText], { wait: 2000 })
   return (
-    <div className="w-full">
-      <div className="w-full h-fit flex items-center mb-4">
+    <div className="w-full relative">
         <Button
+          className="mb-4"
+          size='icon'
           onClick={() => setEdit(!edit)}
-          variant='outline'
-        >{edit ? "Закрыть" : "Изменить"}</Button>
-      </div>
+          variant={edit ? 'outline' : 'default'}
+        >{edit ? <BiX /> : <BiEdit />}</Button>
       {
         edit
         ? <ForwardRefEditor markdown={text} onChange={value => setText(value)} />

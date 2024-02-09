@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from
 import { EventTodo } from '@/types/calendar'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { toast } from 'sonner'
 
 type Props = {
   id: string
@@ -26,6 +27,7 @@ const NewTodoModal = ({ todos, id }: Props) => {
     }
     todos.push(newTodo)
     await calendar.event.update(id, { todo: todos })
+    toast('Задача добавлена')
     refresh()
     setOpen(false)
   }
