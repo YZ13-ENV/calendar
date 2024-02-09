@@ -14,10 +14,10 @@ const list = (prefix?: string) => {
       label: 'Задачи',
       value: '/todo'
     },
-    {
-      label: 'Заметки',
-      value: '/notes'
-    },
+    // {
+      // label: 'Заметки',
+      // value: '/notes'
+    // },
     {
       label: 'Настройки',
       value: '/settings'
