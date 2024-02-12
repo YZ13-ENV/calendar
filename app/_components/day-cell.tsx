@@ -1,6 +1,7 @@
 'use client'
 import { DocEvent } from "@/types/calendar"
 import { DateTime } from "luxon"
+import Link from "next/link"
 import { ElementRef, useEffect, useRef, useState } from "react"
 
 type Props = {
@@ -18,7 +19,7 @@ const DayCell = ({ event }: Props) => {
   const minutesBlockHeight = 256 / 60
   const secondsBlockHeight = 256 / (60 * 2)
   const top = (date.hour * hourHeight) + (date.minute * minuteHeight) + (date.second * secondHeight)
-  // const eventHeight = (endDate.hour - date.hour) * hourBlockHeight + (endDate.minute - date.minute) * minutesBlockHeight + (endDate.second - date.second) * secondsBlockHeight
+  const eventHeight = (endDate.hour - date.hour) * hourBlockHeight + (endDate.minute - date.minute) * minutesBlockHeight + (endDate.second - date.second) * secondsBlockHeight
   useEffect(() => {
     const div = ref.current
     if (div) {
@@ -31,8 +32,9 @@ const DayCell = ({ event }: Props) => {
     }
   },[ref])
   return (
-    <div ref={ref} style={{ top: `${top}px` }}
-    className="absolute w-full px-20 z-20 h-fit">
+    <div ref={ref} style={{ top: `${top}px`, height: `${eventHeight}px` }}
+    className="absolute w-full px-20 z-10 h-fit">
+      {/* <Link href={`/event/${event.doc_id}`} className="absolute w-full h-full" /> */}
       <div className="w-full h-full rounded-lg transition-colors hover:bg-muted cursor-pointer border bg-card p-3">
         <div className="w-fit h-fit flex items-center gap-2">
           <span className="text-sm">{date.toFormat('HH:mm')}-{endDate.toFormat('HH:mm')}</span>

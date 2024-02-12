@@ -1,5 +1,5 @@
 import MonthDayNames from "@/components/shared/month-day-names";
-import Header from "@/components/widgets/header";
+// import Header from "@/components/widgets/header";
 import { generateMonthCalendar } from "@/helpers/calendar-generators";
 import { DateTime } from "luxon";
 import { redirect } from "next/navigation";

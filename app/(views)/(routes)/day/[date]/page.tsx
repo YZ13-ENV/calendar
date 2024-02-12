@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator"
 import { DateTime } from "luxon"
 import { redirect } from "next/navigation"
-import Header from "@/components/widgets/header"
+// import Header from "@/components/widgets/header"
 import Redline from "@/components/shared/redline"
 import { cookies } from "next/headers"
 import { calendar } from "@/api/calendar"
