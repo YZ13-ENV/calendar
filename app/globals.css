@@ -140,6 +140,9 @@
   .md-layout > p {
     @apply my-4
   }
+  /* .md-layout > ul, ol { */
+    /* @apply px-4 */
+  /* } */
   .md-layout > span {
     @apply my-4
   }

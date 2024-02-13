@@ -61,7 +61,7 @@ const NewEventDrawer = () => {
   return (
     <Drawer open={open} onOpenChange={state => setOpen(state)}>
       <DrawerTrigger asChild>
-        <Button disabled={!user} size='sm' className='gap-2'><BiPlus size={18} />Добавить</Button>
+        <Button disabled={!user} size='icon' variant='outline' className='gap-2 bg-transparent shrink-0 !rounded-l-none'><BiPlus size={18} /></Button>
         {/* <div className="w-fit flex items-center"> */}
           {/* <Button className='gap-2 rounded-none rounded-l-md' disabled={!user}><BiPlus size={18} />Добавить</Button> */}
           {/* <Button className='rounded-none rounded-r-md' size='icon'><BiChevronDown /></Button> */}

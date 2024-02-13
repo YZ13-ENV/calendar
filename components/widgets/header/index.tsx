@@ -8,7 +8,12 @@ import dynamic from "next/dynamic"
 import ViewSelect from "../view-select"
 import { Button } from "@/components/ui/button"
 const UserSection = dynamic(() => import("./user-section"), {
-    ssr: false
+    ssr: false,
+    loading: () => <div className="w-fit h-fit flex items-center gap-3">
+        <div className="w-9 aspect-square shrink-0 bg-muted animate-pulse rounded-full" />
+        <div className="w-9 aspect-square shrink-0 bg-muted animate-pulse rounded-full" />
+        <div className="w-9 aspect-square shrink-0 bg-muted animate-pulse rounded-full" />
+    </div>
 })
 
 type ViewMode = 'day' | 'week' | 'month' | 'year'
@@ -59,8 +64,10 @@ const Header = () => {
                 <Button variant='outline'><Link href={linkByMode}>Сегодня</Link></Button>
             </div>
             <div className="w-fit h-fit flex items-center gap-3">
-                <ViewSelect />
-                <NewEventDrawer />
+                <div className="flex items-center">
+                    <ViewSelect />
+                    <NewEventDrawer />
+                </div>
                 <UserSection />
             </div>
         </header>

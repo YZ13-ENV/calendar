@@ -1,13 +1,16 @@
 'use client'
+import { Button } from "@/components/ui/button"
 import { DocEvent } from "@/types/calendar"
 import { DateTime } from "luxon"
 import Link from "next/link"
-import { ElementRef, useEffect, useRef, useState } from "react"
+import { ElementRef, ReactNode, useEffect, useRef, useState } from "react"
+import { BiRightArrowAlt } from "react-icons/bi"
 
 type Props = {
   event: DocEvent
+  children?: ReactNode
 }
-const DayCell = ({ event }: Props) => {
+const DayCell = ({ event, children }: Props) => {
   const date = DateTime.fromSeconds(event.date.start)
   const endDate = DateTime.fromSeconds(event.date.end)
   const [height, setHeight] = useState<number>(0)
@@ -33,15 +36,22 @@ const DayCell = ({ event }: Props) => {
   },[ref])
   return (
     <div ref={ref} style={{ top: `${top}px`, height: `${eventHeight}px` }}
-    className="absolute w-full px-20 z-10 h-fit">
-      {/* <Link href={`/event/${event.doc_id}`} className="absolute w-full h-full" /> */}
-      <div className="w-full h-full rounded-lg transition-colors hover:bg-muted cursor-pointer border bg-card p-3">
+    className="absolute w-full px-20 z-10 h-fit group">
+      <div className="w-full h-full rounded-lg transition-colors cursor-pointer border bg-background group-hover:border-primary p-3">
         <div className="w-fit h-fit flex items-center gap-2">
           <span className="text-sm">{date.toFormat('HH:mm')}-{endDate.toFormat('HH:mm')}</span>
           <span className="text-sm text-muted-foreground">-</span>
           <span className="text-sm">{ event.name }</span>
         </div>
-        <span className="text-xs text-muted-foreground">{event.description}</span>
+        <div className="w-full h-fit mt-4">
+          <Button variant='outline' asChild className="rounded-full gap-2">
+            <Link href={`/event/${event.doc_id}`}>
+              Открыть
+              <BiRightArrowAlt size={16} />
+            </Link>
+          </Button>
+          { children }
+        </div>
       </div>
     </div>
   )

@@ -17,10 +17,10 @@ const ViewSelect = () => {
       label: "Месяц",
       value: "month"
     },
-    {
-      label: "Год",
-      value: "year"
-    }
+    // {
+      // label: "Год",
+      // value: "year"
+    // }
   ]
   const path = usePathname()
   const [debouncedSelected, setDebouncedSelected] = useState(views[0].value)
@@ -44,7 +44,7 @@ const ViewSelect = () => {
   },[selected, setSelected])
   return (
     <Select value={selected} onValueChange={value => setSelected(value)}>
-      <SelectTrigger>{views.find(view => view.value === selected)?.label}</SelectTrigger>
+      <SelectTrigger className="!rounded-r-none">{views.find(view => view.value === selected)?.label}</SelectTrigger>
       <SelectContent>
         {
           views.map(view =>

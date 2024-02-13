@@ -21,9 +21,9 @@ const page = ({ params }: Props) => {
           const key = month_date.toFormat('dd-MM-yyyy')
           const isMatchActualMonth = actual_date.month === month_date.month
           return (
-            <div key={key + '-wrapper'} className="border-b border-r w-full h-full flex flex-col">
+            <div key={key + '-wrapper'} className="w-full h-full flex flex-col">
               <Link href={`/month/${key}`}
-              className="w-full h-9 flex items-center justify-center border-b hover:bg-card transition-colors">
+              className="w-full h-9 flex items-center justify-center hover:bg-card transition-colors">
                 <span className={`text-sm ${isMatchActualMonth ? 'text-accent-foreground' : 'text-muted-foreground'} text-center capitalize mx-auto`}>
                   { month_date.monthLong }
                 </span>
@@ -32,7 +32,7 @@ const page = ({ params }: Props) => {
                 {
                   month_grid.map(
                     item => {
-                      const isMatchItemMonth = item.date.month === month_date.month
+                      const isMatchItemMonth = actual_date.month === item.date.month
                       const day_key = item.date.toFormat('dd-MM-yyyy')
                       return (
                         <Link key={key} href={`/day/${day_key}`}

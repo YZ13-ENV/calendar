@@ -5,7 +5,11 @@ import { redirect } from "next/navigation"
 import Redline from "@/components/shared/redline"
 import { cookies } from "next/headers"
 import { calendar } from "@/api/calendar"
-import DayCell from "@/app/_components/day-cell"
+import { MDXRemote } from "next-mdx-remote/rsc"
+import dynamic from "next/dynamic"
+const DayCell = dynamic(() => import("@/app/_components/day-cell"), {
+  ssr: false
+})
 
 type Props = {
   params: {
@@ -33,7 +37,16 @@ const page = async({ params }: Props) => {
     className="relative w-full min-h-full h-fit shrink-0 flex flex-col">
       { isMatchWithRealDate && <Redline /> }
       {
-        events.map(event => <DayCell key={event.doc_id} event={event} />)
+        events.map(
+          event => <DayCell key={event.doc_id} event={event}>
+          {
+            event.description &&
+            <div className="mt-6 max-w-full w-fit md-layout text-xs text-muted-foreground p-4 rounded-md bg-muted">
+              <MDXRemote source={event.description || ''} />
+            </div>
+          }
+          </DayCell>
+        )
       }
       {
         scratch.map(item =>
