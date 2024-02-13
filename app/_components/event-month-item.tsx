@@ -1,6 +1,7 @@
 "use client"
 
 import { useAppSelector } from "@/components/entities/store/store"
+import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
 import { DocEvent } from "@/types/calendar"
 import { DateTime } from "luxon"
@@ -19,6 +20,8 @@ const EventMonthItem = ({ event, index }: Props) => {
   const start = DateTime.fromSeconds(event.date.start)
   const end = DateTime.fromSeconds(event.date.end)
   const isEnded = inSeconds >= event.date.end
+  const haveTodo = !!event.todo
+  const allTodosCompleted = event.todo ? event.todo.filter(todo => todo.checked).length === event.todo.length : false
   return (
     <Link href={`/event/${event.doc_id}`}
     className={cn(
@@ -26,10 +29,15 @@ const EventMonthItem = ({ event, index }: Props) => {
       dynamicClassName,
       `w-full h-1/4 transition-colors hover:bg-muted flex items-center justify-between px-3`
     )}>
-      <span className={cn(
-        isEnded ? "line-through" : "",
-        "line-clamp-1 text-xs text-muted-foreground"
-      )}>{event.name}</span>
+      <div className='w-fit flex items-center gap-2'>
+        {
+          haveTodo && <Checkbox checked={allTodosCompleted} />
+        }
+        <span className={cn(
+          isEnded ? "line-through" : "",
+          "line-clamp-1 text-xs text-muted-foreground"
+        )}>{event.name}</span>
+      </div>
       <span className="text-xs text-muted-foreground shrink-0">
         { start.hour > 9 ? start.hour : `0${start.hour}` }
         :

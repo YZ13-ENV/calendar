@@ -1,5 +1,5 @@
-import 'ui/dist/style.css'
 import './globals.css'
+import 'ui/dist/style.css'
 import type { Metadata } from 'next'
 import { Geologica } from 'next/font/google'
 import StateProvider from '@/components/StateProvider'

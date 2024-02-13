@@ -8,6 +8,7 @@ import { DocEvent } from "@/types/calendar"
 import { DateTime } from "luxon"
 import dynamic from "next/dynamic"
 import LiveMarking from "./live-marking"
+import { cn } from "@/lib/utils"
 
 type Props = {
   date: DocEvent['date']
@@ -23,7 +24,16 @@ const LiveIndicator = ({ date }: Props) => {
   const hours_duration = end.hour - start.hour
   return (
     <div className="w-full h-fit flex flex-col gap-4">
-      <div className="w-full relative h-10 flex items-center justify-between text-muted-foreground">
+      <div className={cn(
+        isGone ? 'h-10 bg-gradient-to-r from-transparent via-card to-transparent' : 'h-10' ,
+        "w-full relative flex items-center justify-between text-muted-foreground"
+      )}>
+        {
+          isGone &&
+          <div className="absolute w-full h-full flex items-center justify-center">
+            <span className="text-center text-sm text-muted-foreground">Событие закончилось</span>
+          </div>
+        }
         {
           isLive &&
           <Redline

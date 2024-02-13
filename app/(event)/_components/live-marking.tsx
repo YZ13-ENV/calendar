@@ -19,7 +19,7 @@ const LiveMarking = ({ duration=24, start={ hour: 0, minute: 0 }, end={ hour: 23
         {
           duration_as_array.map((hour, index, arr) => {
             const minutes = index === 0 ? start.minute : index === arr.length - 1 ? end.minute : undefined
-            return <MarkUnit key={index} minutes={minutes} />
+            return <MarkUnit key={index} minutes={minutes} isFirst={index === 0} />
           })
         }
     </>
@@ -28,12 +28,13 @@ const LiveMarking = ({ duration=24, start={ hour: 0, minute: 0 }, end={ hour: 23
 type MarkType = '1/3' | '2/3' | '3/3'
 type MarkUnitProps = {
   minutes?: number
+  isFirst?: boolean
 }
-const MarkUnit = ({ minutes=0 }: MarkUnitProps) => {
+const MarkUnit = ({ minutes=0, isFirst=false }: MarkUnitProps) => {
   const default_marks: MarkType[] = ['1/3', '2/3', '1/3', '3/3']
   const marks: MarkType[] =
   !minutes || minutes === 0
-  ? default_marks
+  ? isFirst ? ['3/3', ...default_marks] : default_marks
   : minutes >= 1 && minutes <= 15
   ? ['1/3', '2/3', '1/3', '3/3'] as MarkType[]
   : minutes >= 16 && minutes <= 30
