@@ -25,7 +25,7 @@ const layout = async({ children, params }: Props) => {
   if (!visitorId || !eventAuthorIsMatching) return redirect('/')
   return (
     <div className="w-full h-screen flex flex-col">
-      <div className="w-full h-fit flex items-center justify-between border-b py-4 px-6 bg-card">
+      <div className="w-full h-16 shrink-0 flex items-center justify-between border-b py-4 px-6 bg-card">
         <div className="flex items-center gap-2">
           <Button variant='ghost' asChild size='icon'>
             <Link href={key ? `/month/${key}` : '/month'}>
@@ -38,7 +38,7 @@ const layout = async({ children, params }: Props) => {
           <UserSection />
         </div>
       </div>
-      {children}
+      { children }
     </div>
   )
 }

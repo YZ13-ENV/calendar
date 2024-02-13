@@ -2,17 +2,28 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { usePathname, useRouter } from "next/navigation"
 import { useMemo } from "react"
+import { MdEventNote } from "react-icons/md";
+import { LuListTodo } from "react-icons/lu";
+import { BiCog } from "react-icons/bi";
+import { useMediaQuery } from "react-responsive";
 
 // TODO -> Надо унифицировать этот компонент + два варианта, один дефолтный, второй с плавающей полоской
-const list = (prefix?: string) => {
-  const tabs = [
+type NavItem = {
+  label: string
+  value: string
+  icon?: JSX.Element
+}
+const list = (prefix?: string): NavItem[] => {
+  const tabs: NavItem[] = [
     {
       label: 'Событие',
-      value: '/'
+      value: '/',
+      icon: <MdEventNote />
     },
     {
       label: 'Задачи',
-      value: '/todo'
+      value: '/todo',
+      icon: <LuListTodo />
     },
     // {
       // label: 'Заметки',
@@ -20,7 +31,8 @@ const list = (prefix?: string) => {
     // },
     {
       label: 'Настройки',
-      value: '/settings'
+      value: '/settings',
+      icon: <BiCog />
     }
   ].map(tab => ({ ...tab, value: prefix ? prefix + tab.value : tab.value  }))
   return tabs
@@ -33,6 +45,7 @@ const EventNav = ({ prefix }: Props) => {
   const fullPrefix = '/event/' + prefix
   const listWithPrefix = list(fullPrefix)
   const { push } = useRouter()
+  const isMobile = useMediaQuery({ query: '(max-width: 1224px)' })
   const value = useMemo(() => {
     if (path === fullPrefix) return path + '/'
     return path
@@ -42,7 +55,10 @@ const EventNav = ({ prefix }: Props) => {
       <TabsList>
         {
           listWithPrefix.map(tab =>
-            <TabsTrigger key={tab.value} value={tab.value}>{ tab.label }</TabsTrigger>
+            <TabsTrigger key={tab.value} className="min-h-7 gap-2 min-w-10" value={tab.value}>
+              { tab.icon && tab.icon }
+              { !isMobile && tab.label }
+            </TabsTrigger>
           )
         }
       </TabsList>

@@ -106,7 +106,7 @@ dependencies:
     version: 1.0.7(tailwindcss@3.4.1)
   ui:
     specifier: github:yz13-env/ui
-    version: github.com/yz13-env/ui/f0cee442fc54d07d2ddf21bf28a2db181ae892a1(@codemirror/language@6.10.1)(@lezer/common@1.2.1)(@lezer/highlight@1.2.0)(@types/react-dom@18.2.18)(@types/react@18.2.47)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.4.1)(yjs@13.6.12)
+    version: github.com/yz13-env/ui/d06b43cd56bf5f1d816bfbc1d137d6dcaea92f56(@codemirror/language@6.10.1)(@lezer/common@1.2.1)(@lezer/highlight@1.2.0)(@types/react-dom@18.2.18)(@types/react@18.2.47)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.4.1)(yjs@13.6.12)
   vaul:
     specifier: ^0.8.0
     version: 0.8.0(@types/react-dom@18.2.18)(@types/react@18.2.47)(react-dom@18.2.0)(react@18.2.0)
@@ -7252,9 +7252,9 @@ packages:
       - sass
     dev: false
 
-  github.com/yz13-env/ui/f0cee442fc54d07d2ddf21bf28a2db181ae892a1(@codemirror/language@6.10.1)(@lezer/common@1.2.1)(@lezer/highlight@1.2.0)(@types/react-dom@18.2.18)(@types/react@18.2.47)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.4.1)(yjs@13.6.12):
-    resolution: {tarball: https://codeload.github.com/yz13-env/ui/tar.gz/f0cee442fc54d07d2ddf21bf28a2db181ae892a1}
-    id: github.com/yz13-env/ui/f0cee442fc54d07d2ddf21bf28a2db181ae892a1
+  github.com/yz13-env/ui/d06b43cd56bf5f1d816bfbc1d137d6dcaea92f56(@codemirror/language@6.10.1)(@lezer/common@1.2.1)(@lezer/highlight@1.2.0)(@types/react-dom@18.2.18)(@types/react@18.2.47)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.4.1)(yjs@13.6.12):
+    resolution: {tarball: https://codeload.github.com/yz13-env/ui/tar.gz/d06b43cd56bf5f1d816bfbc1d137d6dcaea92f56}
+    id: github.com/yz13-env/ui/d06b43cd56bf5f1d816bfbc1d137d6dcaea92f56
     name: ui
     version: 0.0.6-3
     engines: {node: '21'}

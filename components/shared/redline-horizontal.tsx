@@ -54,7 +54,7 @@ const Redline = ({ hideTime=false, duration_hour=24, start_hour=0, start_minute=
     className="w-fit transition-transform h-full flex flex-col justify-center items-center absolute z-20">
       {
         !hideTime &&
-        <span className="absolute -bottom-8 z-20 text-destructive-foreground text-xs">
+        <span className="absolute -top-8 z-20 text-destructive-foreground text-xs">
           {date.hour > 9 ? date.hour : `0${date.hour}`}:{date.minute > 9 ? date.minute : `0${date.minute}`}
         </span>
       }

@@ -3,7 +3,6 @@ import { useAppSelector } from "@/components/entities/store/store"
 const Redline = dynamic(() => import("@/components/shared/redline-horizontal"), {
   ssr: false
 })
-import { Separator } from "@/components/ui/separator"
 import { DocEvent } from "@/types/calendar"
 import { DateTime } from "luxon"
 import dynamic from "next/dynamic"
@@ -51,8 +50,8 @@ const LiveIndicator = ({ date }: Props) => {
         />
       </div>
       <div className="w-full flex items-center justify-between">
-        <span className="relative -left-[18px] text-xs text-muted-foreground">{ start.toFormat('HH:mm') }</span>
-        <span className="relative -right-[18px] text-xs text-muted-foreground">{ end.toFormat('HH:mm') }</span>
+        <span className="relative text-xs text-muted-foreground">{ start.toFormat('HH:mm') }</span>
+        <span className="relative text-xs text-muted-foreground">{ end.toFormat('HH:mm') }</span>
       </div>
     </div>
   )
