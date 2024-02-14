@@ -3,6 +3,7 @@ import { calendar } from '@/api/calendar'
 import { Checkbox } from '@/components/ui/checkbox'
 import { EventTodo } from '@/types/calendar'
 import { useRouter } from 'next/navigation'
+import { BiTrashAlt } from 'react-icons/bi'
 
 type Props = {
   id: string
@@ -24,13 +25,21 @@ const Todo = ({ id, index, todos, todo }: Props) => {
     await calendar.event.update(id, { todo: updatedTodos })
     refresh()
   }
+  const deleteTodo = async() => {
+    await calendar.event.delete(id)
+    refresh()
+  }
   return (
-    <div key={todo.deadline || `todo#${index}`} className="w-full flex items-center gap-2 px-2 h-9 border-b">
+    <div key={todo.deadline || `todo#${index}`} className="w-full flex justify-between items-center gap-2 px-2 h-9 border-b group">
       <div className='w-fit h-fit flex items-center gap-2'>
         <Checkbox checked={todo.checked} onCheckedChange={checked => updateTodo({ checked: Boolean(checked) })} />
         <span className="text-sm text-accent-foreground">{todo.text}</span>
       </div>
-      <div className='w-fit h-fit flex items-center gap-2'></div>
+      <div className='w-fit h-fit flex items-center gap-2'>
+        <button onClick={deleteTodo} className='h-full group-hover:flex items-center justify-center px-2 hidden'>
+          <BiTrashAlt size={16} />
+        </button>
+      </div>
     </div>
   )
 }
