@@ -26,7 +26,8 @@ const Todo = ({ id, index, todos, todo }: Props) => {
     refresh()
   }
   const deleteTodo = async() => {
-    await calendar.event.delete(id)
+    const updatedTodos = todos.filter((_, i) => i !== index)
+    await calendar.event.update(id, { todo: updatedTodos })
     refresh()
   }
   return (
